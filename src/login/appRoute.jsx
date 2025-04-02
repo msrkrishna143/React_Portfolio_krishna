@@ -8,7 +8,8 @@ import Counter from '@/components/utility/Counter';
 import Country from '@/components/utility/Country';
 import Memes from '@/components/utility/memesList';
 import TodoList from '@/Pages/TodoList';
-
+import SearchBar from '@/components/utility/Searchbar';
+import Rating from '@/components/utility/Rating';
 
 
  
@@ -24,6 +25,9 @@ const AppRoutes = () => {
             <Route path="/todolist" element={<TodoList/>}/>
             <Route path="/memes" element={<Memes/>}/>
             <Route path="/counter" element={<Counter/>} />
+            <Route path="/searchbar" element={<SearchBar/>}/>
+            <Route path="/rating" element={<Rating/>}/>
+            
          </Routes>
       </>
    );
