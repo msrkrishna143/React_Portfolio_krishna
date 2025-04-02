@@ -37,11 +37,11 @@ const StarRating = ({ rating }) => {
 // The main Survey component
 const Rating = () => {
   const questions = [
-    'How would you rate the product?',
-    'How would you rate the quality?',
-    'How would you rate the usability?',
-    'How would you rate the value for money?',
-    'How would you rate the customer service?',
+     'Requirements',
+    'coding',
+    'depolyment',
+    'Testing',
+    'client review',
   ];
 
   const [ratings, setRatings] = useState([0, 0, 0, 0, 0]);
