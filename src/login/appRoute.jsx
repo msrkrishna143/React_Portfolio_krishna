@@ -10,6 +10,7 @@ import Memes from '@/components/utility/memesList';
 import TodoList from '@/Pages/TodoList';
 import SearchBar from '@/components/utility/Searchbar';
 import Rating from '@/components/utility/Rating';
+import Components from '@/components/utility/Components';
 
 
  
@@ -27,7 +28,7 @@ const AppRoutes = () => {
             <Route path="/counter" element={<Counter/>} />
             <Route path="/searchbar" element={<SearchBar/>}/>
             <Route path="/rating" element={<Rating/>}/>
-            
+            <Route path="/components" element={<Components/>}/>
          </Routes>
       </>
    );

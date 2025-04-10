@@ -59,7 +59,9 @@ div.form
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 20px;
   padding: 20px;
+  margin-left: 15%;
   height: 400px;
+  margin-top: 5%;
 }
 
 
@@ -84,7 +86,7 @@ div.form
   font-family: Arial, sans-serif;
 }
 .bg-danger {
-  background-color: #dc3545;
+  background-color: #b23b3b;
   color: white;
 }
 .button {
@@ -232,21 +234,20 @@ div.form
   }
   .logout-button {
     position: absolute; /* Position it absolutely within the container */
-    top: 20px; /* Distance from the top */
+     
     right: 20px; /* Distance from the right */
     background-color: #dc3545; /* Red background color */
     color: white; /* White text */
-    padding: 10px 20px; /* Padding for the button */
-    border: none; /* Remove default border */
+    
+    
     border-radius: 5px; /* Rounded corners */
-    font-size: 1rem; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth background color transition */
+   
+    
   }
   
   /* Hover effect for the logout button */
   .logout-button:hover {
-    background-color: #c82333; /* Darker red on hover */
+    background-color: #8d7d37; /* Darker red on hover */
   }
   
   /* Optional: Add a focus effect if button is clicked */
@@ -335,7 +336,9 @@ div.form
   flex: 1;
   padding: 10px;
 }
-
+.stars {
+    margin-left: 15%;
+}
 h1 {
   margin-bottom: 20px;
   font-size: 24px;
@@ -364,6 +367,31 @@ input[type="text"] {
 
 input[type="text"]:focus {
   border-color: #4A90E2; /* Blue color for focus */
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 60px 20px;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+.logout-button {
+  padding: 5px 10px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
     
