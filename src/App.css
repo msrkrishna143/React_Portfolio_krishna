@@ -39,8 +39,20 @@
   }
 }
 
+
 .card {
-  padding: 2em;
+  padding: 0.2em;
+  margin-left: 20%;
+  margin-top:1%;
+}
+.accordion {
+
+  margin-left: 10%;
+  margin-top: 5%;
+
+}
+.canvas {
+  margin-left: 10%;
 }
 
 div.form

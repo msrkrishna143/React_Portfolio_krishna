@@ -24,6 +24,9 @@ const Sidebar = () => {
           <li>
               <Link to="/components">Components</Link>
           </li>
+		  <li>
+              <Link to="/survey">Survey</Link>
+          </li>
 
         </ul>
       </nav>

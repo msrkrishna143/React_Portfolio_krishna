@@ -11,6 +11,7 @@ import TodoList from '@/Pages/TodoList';
 import SearchBar from '@/components/utility/Searchbar';
 import Rating from '@/components/utility/Rating';
 import Components from '@/components/utility/Components';
+import Survey from '@/components/utility/Accordion';
 
 
  
@@ -29,6 +30,7 @@ const AppRoutes = () => {
             <Route path="/searchbar" element={<SearchBar/>}/>
             <Route path="/rating" element={<Rating/>}/>
             <Route path="/components" element={<Components/>}/>
+			<Route path="/survey" element={<Survey/>} />
          </Routes>
       </>
    );
