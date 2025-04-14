@@ -39,24 +39,42 @@ const StarRating = ({ rating }) => {
 const Survey = () => {
   const questions = [
     'Requirements',
-    'coding',
-    'depolyment',
+    'Coding',
+    'Deployment',
     'Testing',
-    'client review',
+    'Client Review',
   ];
 
-  const [ratings, setRatings] = useState([0, 0, 0, 0, 0]);
+  // Initialize state for ratings of each main question and sub-question
+  const [ratings, setRatings] = useState(questions.map(() => [0, 0, 0, 0, 0]));
+  const [headerRatings, setHeaderRatings] = useState(questions.map(() => 0));
   const [finalRating, setFinalRating] = useState(0);
   const [showChart, setShowChart] = useState(false); // State to control chart visibility
 
   // Function to handle rating change
-  const handleRatingChange = (index, rating) => {
+  const handleRatingChange = (questionIndex, subQuestionIndex, rating) => {
     const updatedRatings = [...ratings];
-    updatedRatings[index] = rating;
+    updatedRatings[questionIndex][subQuestionIndex] = rating;
     setRatings(updatedRatings);
 
-    const averageRating = updatedRatings.reduce((acc, curr) => acc + curr, 0) / updatedRatings.length;
-    setFinalRating(Math.round(averageRating));
+    // Calculate the sum of ratings for the current question
+    const sumRatings = updatedRatings[questionIndex].reduce((acc, curr) => acc + curr, 0);
+    const headerRating = Math.round(sumRatings / 5); // Average rating for the header
+
+    const updatedHeaderRatings = [...headerRatings];
+    updatedHeaderRatings[questionIndex] = headerRating;
+    setHeaderRatings(updatedHeaderRatings);
+
+    // Calculate the final rating based on the average of all header ratings
+    const averageHeaderRating = updatedHeaderRatings.reduce((acc, curr) => acc + curr, 0) / questions.length;
+    setFinalRating(Math.round(averageHeaderRating));
+  };
+
+  // Function to clear all ratings
+  const clearRatings = () => {
+    setRatings(questions.map(() => [0, 0, 0, 0, 0]));
+    setHeaderRatings(questions.map(() => 0));
+    setFinalRating(0);
   };
 
   // Data for the Bar chart
@@ -65,7 +83,7 @@ const Survey = () => {
     datasets: [
       {
         label: 'Average Rating',
-        data: ratings, // Rating for each question
+        data: headerRatings, // Average rating for each main question
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
@@ -93,67 +111,101 @@ const Survey = () => {
   };
 
   return (
-         <>
-           <div>
-               <Sidebar/>
-           </div>
-                <Accordion defaultActiveKey="0">
-                <div className="header">
-                        <b>Rate component</b>  
-                </div>
-                  {questions.map((question, index) => (
-                    <Card key={index}>
-                      <Accordion.Header>
-                        <h4>{question}</h4>
-                      </Accordion.Header>
-                      <Accordion.Body>
-                        <Card.Body>
-                          <div style={{ display: 'flex', justifyContent: 'center' }}>
-                            {[1, 2, 3, 4, 5].map((rating) => (
-                              <Star
-                                key={rating}
-                                filled={rating <= ratings[index]}
-                                onClick={() => handleRatingChange(index, rating)} // Handle rating change
-                              />
-                            ))}
-                          </div>
-                        </Card.Body>
-                      </Accordion.Body>
-                    </Card>
+    <>
+      <div>
+        <Sidebar />
+      </div>
+      <Accordion defaultActiveKey="0">
+        <div className="header">
+          <b>Rate component</b>
+        </div>
+        {questions.map((question, questionIndex) => (
+          <Card key={questionIndex}>
+            <Accordion.Header>
+              <h4 style={{ width: '100%', fontSize: '18px' }}>
+                {question}
+                <div style={{ display: 'flex', justifyContent: 'right' }}>
+                  {[1, 2, 3, 4, 5].map((rating) => (
+                    <Star
+                      key={rating}
+                      filled={rating <= headerRatings[questionIndex]}
+                      onClick={() => {}}
+                    />
                   ))}
-                </Accordion>
-              <h3>Final Rating</h3>
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                {[1, 2, 3, 4, 5].map((rating) => (
-                  <span
-                    key={rating}
-                    style={{
-                      color: rating <= finalRating ? 'gold' : 'gray',
-                      fontSize: '30px',
-                    }}
-                  >
-                    ★
-                  </span>
-                ))}
-              </div>
-
-          {/* Button to toggle chart visibility */}
-              <Button
-                variant="primary"
-                onClick={toggleChartVisibility}
-                style={{ marginTop: '20px' }}
-              >
-                {showChart ? 'Hide Chart' : 'Show Chart'}
-              </Button>
-
-              {/* Bar chart displaying the ratings */}
-              {showChart && (
-                <div style={{ marginTop: '40px', width: '40%', margin: '0 auto' }}>
-                  <Bar data={chartData} options={chartOptions} />
                 </div>
-              )}
-       
-      </>
+              </h4>
+            </Accordion.Header>
+            <Accordion.Body>
+              <Card.Body>
+                <div style={{ marginTop: '20px' }}>
+                 
+                  {Array.from({ length: 5 }, (_, subQuestionIndex) => (
+                    <div key={subQuestionIndex} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <p style={{ flex: 1 }}>Question {subQuestionIndex + 1} for {question}</p>
+                      <div style={{ display: 'flex', justifyContent: 'center', flex: 1 }}>
+                        {[0, 1, 2, 3, 4, 5].map((rating) => (
+                          <span
+                            key={rating}
+                            style={{
+                              cursor: 'pointer',
+                              color: rating <= ratings[questionIndex][subQuestionIndex] ? 'gold' : 'gray',
+                              fontSize: '20px',
+                              margin: '0 5px',
+                            }}
+                            onClick={() => handleRatingChange(questionIndex, subQuestionIndex, rating)}
+                          >
+                            {rating}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card.Body>
+            </Accordion.Body>
+          </Card>
+        ))}
+      </Accordion>
+      <h3>Final Rating</h3>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {[1, 2, 3, 4, 5].map((rating) => (
+          <span
+            key={rating}
+            style={{
+              color: rating <= finalRating ? 'gold' : 'gray',
+              fontSize: '30px',
+            }}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+
+      {/* Button to clear all ratings */}
+      <Button
+        variant="secondary"
+        onClick={clearRatings}
+        style={{ marginTop: '20px', marginRight: '10px' }}
+      >
+        Clear
+      </Button>
+
+      {/* Button to toggle chart visibility */}
+      <Button
+        variant="primary"
+        onClick={toggleChartVisibility}
+        style={{ marginTop: '20px' }}
+      >
+        {showChart ? 'Hide Chart' : 'Show Chart'}
+      </Button>
+
+      {/* Bar chart displaying the ratings */}
+      {showChart && (
+        <div style={{ marginTop: '40px', width: '40%', margin: '0 auto' }}>
+          <Bar data={chartData} options={chartOptions} />
+        </div>
+      )}
+    </>
   );
 };
 
