@@ -21,19 +21,7 @@ const Star = ({ filled, onClick }) => (
   </span>
 );
 
-// StarRating component to calculate and display the average rating
-const StarRating = ({ rating }) => {
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      {Array.from({ length: 5 }, (_, index) => (
-        <Star key={index} filled={index < rating} onClick={() => {}} />
-      ))}
-      <div style={{ textAlign: 'center', marginTop: '10px' }}>
-        <p>Your rating: {rating} star{rating !== 1 && 's'}</p>
-      </div>
-    </div>
-  );
-};
+
 
 // The main Survey component
 const Survey = () => {
