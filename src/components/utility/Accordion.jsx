@@ -110,7 +110,7 @@ const Survey = () => {
             <Accordion.Item eventKey={questionIndex.toString()}>
               <Accordion.Header>
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                  <h4 style={{ fontSize: '18px', margin: '0' }}>
+                  <h4>
                     {question}
                   </h4>
                   <div>
