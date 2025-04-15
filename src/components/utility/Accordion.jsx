@@ -21,8 +21,6 @@ const Star = ({ filled, onClick }) => (
   </span>
 );
 
-
-
 // The main Survey component
 const Survey = () => {
   const questions = [
@@ -109,48 +107,52 @@ const Survey = () => {
         </div>
         {questions.map((question, questionIndex) => (
           <Card key={questionIndex}>
-            <Accordion.Header>
-              <h4 style={{ width: '100%', fontSize: '18px' }}>
-                {question}
-                <div style={{ display: 'flex', justifyContent: 'right' }}>
-                  {[1, 2, 3, 4, 5].map((rating) => (
-                    <Star
-                      key={rating}
-                      filled={rating <= headerRatings[questionIndex]}
-                      onClick={() => {}}
-                    />
-                  ))}
+            <Accordion.Item eventKey={questionIndex.toString()}>
+              <Accordion.Header>
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                  <h4 style={{ fontSize: '18px', margin: '0' }}>
+                    {question}
+                  </h4>
+                  <div>
+                    {[1, 2, 3, 4, 5].map((rating) => (
+                      <Star
+                        key={rating}
+                        filled={rating <= headerRatings[questionIndex]}
+                        onClick={() => {}}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </h4>
-            </Accordion.Header>
-            <Accordion.Body>
-              <Card.Body>
-                <div style={{ marginTop: '20px' }}>
-                 
-                  {Array.from({ length: 5 }, (_, subQuestionIndex) => (
-                    <div key={subQuestionIndex} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <p style={{ flex: 1 }}>Question {subQuestionIndex + 1} for {question}</p>
-                      <div style={{ display: 'flex', justifyContent: 'center', flex: 1 }}>
-                        {[0, 1, 2, 3, 4, 5].map((rating) => (
-                          <span
-                            key={rating}
-                            style={{
-                              cursor: 'pointer',
-                              color: rating <= ratings[questionIndex][subQuestionIndex] ? 'gold' : 'gray',
-                              fontSize: '20px',
-                              margin: '0 5px',
-                            }}
-                            onClick={() => handleRatingChange(questionIndex, subQuestionIndex, rating)}
-                          >
-                            {rating}
-                          </span>
-                        ))}
+              </Accordion.Header>
+              <Accordion.Body>
+                <Card.Body>
+                  <div style={{ marginTop: '20px' }}>
+                    <h5>Additional Questions</h5>
+                    {Array.from({ length: 5 }, (_, subQuestionIndex) => (
+                      <div key={subQuestionIndex} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <p style={{ flex: 1 }}>Question {subQuestionIndex + 1} for {question}</p>
+                        <div style={{ display: 'flex', justifyContent: 'center', flex: 1 }}>
+                          {[0, 1, 2, 3, 4, 5].map((rating) => (
+                            <span
+                              key={rating}
+                              style={{
+                                cursor: 'pointer',
+                                color: rating <= ratings[questionIndex][subQuestionIndex] ? 'gold' : 'gray',
+                                fontSize: '20px',
+                                margin: '0 5px',
+                              }}
+                              onClick={() => handleRatingChange(questionIndex, subQuestionIndex, rating)}
+                            >
+                              {rating}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </Card.Body>
-            </Accordion.Body>
+                    ))}
+                  </div>
+                </Card.Body>
+              </Accordion.Body>
+            </Accordion.Item>
           </Card>
         ))}
       </Accordion>
