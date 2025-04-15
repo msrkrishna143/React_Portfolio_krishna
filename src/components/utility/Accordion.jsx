@@ -101,7 +101,7 @@ const Survey = () => {
       <div>
         <Sidebar />
       </div>
-      <Accordion defaultActiveKey="0">
+      <Accordion defaultActiveKey={null}>
         <div className="header">
           <b>Rate component</b>
         </div>
@@ -127,7 +127,7 @@ const Survey = () => {
               <Accordion.Body>
                 <Card.Body>
                   <div style={{ marginTop: '20px' }}>
-                   
+                    <h5>Additional Questions</h5>
                     {Array.from({ length: 5 }, (_, subQuestionIndex) => (
                       <div key={subQuestionIndex} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <p style={{ flex: 1 }}>Question {subQuestionIndex + 1} for {question}</p>
